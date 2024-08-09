@@ -15,17 +15,17 @@ module.exports = {
             const address = data.cname || '获取失败';
             const userPsdArr = [userId.split("")[1], userPsd, 'a'].join("");
             const userPsdEnd = md5(userPsdArr);
-            const sql = 'select * from useradmin where userId = "' + data.userId + '" and userPsd = "' + userPsdEnd + '"';
+            const sql = 'select * from user_admin where userId = "' + data.userId + '" and userPsd = "' + userPsdEnd + '"';
             let result = await mysql.nquery(sql);
             if (result.length === 0) {
                 ctx.body = result;
             }
             else {
                 const date = util.dateFormat();
-                const sqlLoginlist = 'insert into loginlist(ip, userName, address, date) value("' + ip + '", "' + userId + '", "' + address + '", "' + date + '")';
+                const sqlLoginlist = 'insert into login_list(ip, userName, address, date) value("' + ip + '", "' + userId + '", "' + address + '", "' + date + '")';
                 mysql.nquery(sqlLoginlist);
                 const loginTimes = result[0].loginTimes + 1;
-                const sql1 = 'update useradmin set loginTimes = ' + loginTimes + ' where userId = "' + data.userId + '" and userPsd = "' + userPsdEnd + '"';
+                const sql1 = 'update user_admin set loginTimes = ' + loginTimes + ' where userId = "' + data.userId + '" and userPsd = "' + userPsdEnd + '"';
                 mysql.nquery(sql1);
                 const sessionMd5 = md5(userId + userPsd + new Date().getTime().toString());
                 const mysession = { user: sessionMd5 };
@@ -35,10 +35,10 @@ module.exports = {
                     const sql2 = 'select * from user_session where sessionId = "' + userId + '"';
                     const haveUser = await mysql.nquery(sql2);
                     if (haveUser.length === 0) {
-                        const sqlInsertSession = 'insert into user_session(sessionId, expire, data, loginip, count) value("' + userId + '", ' + expire + ', "' + mysession.user + '", "'+ ip +'", 0)';
+                        const sqlInsertSession = 'insert into user_session(sessionId, expire, data, loginIP, count) value("' + userId + '", ' + expire + ', "' + mysession.user + '", "'+ ip +'", 0)';
                         mysql.nquery(sqlInsertSession)
                     } else {
-                        const sqlUpdateSession = 'update user_session set expire = ' + expire + ', data = "' + mysession.user + '", loginip = "' + ip + '", count = ' + (haveUser[0].count + 1) + ' where sessionId = "' + userId + '"';
+                        const sqlUpdateSession = 'update user_session set expire = ' + expire + ', data = "' + mysession.user + '", loginIP = "' + ip + '", count = ' + (haveUser[0].count + 1) + ' where sessionId = "' + userId + '"';
                         mysql.nquery(sqlUpdateSession)
                     }
                 }
@@ -51,7 +51,7 @@ module.exports = {
     autoLogin: async ctx => {
         const ip = ctx.request.body.ip;
         const userCookie = ctx.cookies.get('user');
-        const sql = 'select sessionId, expire, data from user_session where data = "' + userCookie + '" and loginip = "' + ip + '"';
+        const sql = 'select sessionId, expire, data from user_session where data = "' + userCookie + '" and loginIP = "' + ip + '"';
         const result = await mysql.nquery(sql);
         const newDate = new Date().getTime();
         if (result.length > 0) {

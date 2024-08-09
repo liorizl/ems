@@ -13,6 +13,7 @@ module.exports = {
             staticWebName: config.staticWebName,
             staticWebPath: config.staticWebPath
         };
+        console.log(sysMes)
         ctx.body = sysMes
     },
     getHost: ctx => {
