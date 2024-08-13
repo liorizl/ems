@@ -5,7 +5,7 @@
             <div class="nav">
                 <ul class="nav-ul flexCol ">
                     <li class="iconfont"><router-link to="/admin/system/" keep-alive>系统</router-link></li>
-                    <li class="iconfont"><router-link to="/admin/article/" keep-alive>文章</router-link></li>
+                    <li class="iconfont"><router-link to="/admin/news/" keep-alive>新闻</router-link></li>
                     <li class="iconfont"><router-link to="/admin/column/" keep-alive>栏目</router-link></li>
                     <li class="iconfont"><router-link to="/admin/temp/" keep-alive>模版</router-link></li>
                     <li class="iconfont"><router-link to="/admin/tag/" keep-alive>标签 </router-link></li>

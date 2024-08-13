@@ -55,14 +55,14 @@ app.use(async (ctx, next) => {
 const noNeedLogin = require('./router/noNeedLogin.js');
 const routerBasic = require('./router/routerBasic.js');
 // const routerCol = require('./router/routerCol.js');
-// const routerArt = require('./router/routerArt.js');
+const routerNews = require('./router/routerNews.js');
 const routerLogin = require('./router/routerLogin.js');
 // const routerOther = require('./router/routerOther.js');
 // const routerTag = require('./router/routerTag.js');
 // const routerTemp = require('./router/routerTemp.js');
 let  adminUrls = [];
 // const routerAll = noNeedLogin.concat(routerBasic).concat(routerCol).concat(routerArt).concat(routerLogin).concat(routerOther).concat(routerTag).concat(routerTemp);
-const routerAll = noNeedLogin.concat(routerBasic).concat(routerLogin);
+const routerAll = noNeedLogin.concat(routerBasic).concat(routerLogin).concat(routerNews);
 routerAll.forEach((route) => {
     if (/admin/.test(route.url)) {
         adminUrls.push(route.url)

@@ -4,9 +4,10 @@ import login from '@/components/login'
 import admin from '@/components/admin'
 import system from "../components/system/system.vue";
 import sysCon from "../components/system/SysCon.vue";
-import article from "../components/article/Article.vue";
-import articleList from "../components/article/ArticleList.vue";
-import articleAdd from "../components/article/ArticleAdd.vue";
+import news from "../components/news/News.vue";
+import newsInfo from "../components/news/NewsInfo.vue";
+import newsList from "../components/news/NewsList.vue";
+import newsAdd from "../components/news/NewsAdd.vue";
 
 Vue.use(Router)
 
@@ -25,11 +26,11 @@ export default new Router({
             ]
         },
         {
-          path: '/admin/article', component: article,
+          path: '/admin/news', component: news,
           children: [
-              { path: '/admin/article/', component: articleInfo },
-              { path: '/admin/article/ArticleList/', component: articleList, name: 'articleList' },
-              { path: '/admin/article/ArticleAdd/:act', component: articleAdd, name: 'articleAdd' }
+              { path: '/admin/news/', component: newsInfo },
+              { path: '/admin/news/NewsList/', component: newsList, name: 'newsList' },
+              { path: '/admin/news/NewsAdd/', component: newsAdd, name: 'newsAdd' }
           ]
         },
       ]
