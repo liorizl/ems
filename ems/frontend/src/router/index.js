@@ -8,6 +8,10 @@ import news from "../components/news/News.vue";
 import newsInfo from "../components/news/NewsInfo.vue";
 import newsList from "../components/news/NewsList.vue";
 import newsAdd from "../components/news/NewsAdd.vue";
+import newsSetting from "../components/news/NewsSetting.vue"
+import template from "../components/template/template.vue";
+import tempAdd from "../components/template/tempAdd.vue";
+import tempList from "../components/template/tempList.vue";
 
 Vue.use(Router)
 
@@ -30,7 +34,16 @@ export default new Router({
           children: [
               { path: '/admin/news/', component: newsInfo },
               { path: '/admin/news/NewsList/', component: newsList, name: 'newsList' },
-              { path: '/admin/news/NewsAdd/', component: newsAdd, name: 'newsAdd' }
+              { path: '/admin/news/NewsAdd/:act', component: newsAdd, name: 'newsAdd' },
+              { path: '/admin/news/newsSetting/', component: newsSetting, name: 'newsSetting' }
+          ]
+        },
+        {
+          path: '/admin/template', component: template,
+          children: [
+            { path: '/admin/template/', redirect: { name: 'tempList' } },
+            { path: '/admin/template/tempList/', component: tempList, name: 'tempList' },
+            { path: '/admin/template/tempAdd/:act', component: tempAdd, name: 'tempAdd' },
           ]
         },
       ]

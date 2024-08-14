@@ -7,7 +7,7 @@
                     <li class="iconfont"><router-link to="/admin/system/" keep-alive>系统</router-link></li>
                     <li class="iconfont"><router-link to="/admin/news/" keep-alive>新闻</router-link></li>
                     <li class="iconfont"><router-link to="/admin/column/" keep-alive>栏目</router-link></li>
-                    <li class="iconfont"><router-link to="/admin/temp/" keep-alive>模版</router-link></li>
+                    <li class="iconfont"><router-link to="/admin/template/" keep-alive>模版</router-link></li>
                     <li class="iconfont"><router-link to="/admin/tag/" keep-alive>标签 </router-link></li>
                     <li class="iconfont"><router-link to="/admin/user/" keep-alive>用户 </router-link></li>
                     <li class="iconfont"><router-link to="/admin/buildHtml/" keep-alive>生成</router-link></li>
