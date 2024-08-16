@@ -8,18 +8,17 @@
                 <span class="title">标题</span>
                 <span class="operate">操作</span>
             </li>
-            <template v-if="partment&&partmentList.length!=0&&Array.isArray(partmentList)">
+            <template v-if="partmentList&&partmentList.length!=0&&Array.isArray(partmentList)">
                 <template >
                     <li  v-for="(partment, index) in partmentList" :key="index">
                         <span class="checkbox"><input type="checkbox" :value="partment.id" v-model="checkPartment"></span>
                         <span class="id">{{partment.id}}</span>
-                        <span class="title isLink" :class="partment.isUse==='false'?'notUse':''" @click="showpartment(partment.id, index)">
-                            {{partment.title.length > 22 ? partment.title.substr(0, 20) : partment.title}}
+                        <span class="title">
+                            {{partment.name}}
                         </span>
-                        <span class="uptime">{{partment.upTime}}</span>
                         <span class="operate">
-                            <span @click="editNews(partment.id, $route.query.cid)" class="edit">编辑新闻</span> | 
-                            <span @click='deleNews(partment.id, partment.title)' class="dele">删除新闻</span>
+                            <span @click="editNews(partment.id)" class="edit">编辑</span> | 
+                            <span @click='deleNews(partment.id, partment.name)' class="dele">删除</span>
                         </span>
                     </li>
                 </template>
@@ -34,7 +33,7 @@
 import nowPosition from '../tinyComp/NowPosition.vue'
 import subOk from '../tinyComp/SubOk.vue'
 export default {
-    name: "partmentList",
+    name: "partment-list",
     components: {
         nowPosition,
         subOk
@@ -44,17 +43,30 @@ export default {
         return {
             type: parseInt(this.$route.query.type) || 1,
             posiList: '加载中...',
-            propData: { showSub: false, status: 0, pageName: '模版', query: { type: parseInt(this.$route.query.type) || 1 } }
+            partmentList: [],
+            checkPartment: [],
+            propData: { showSub: false, status: 0, pageName: '部门', query: { type: parseInt(this.$route.query.type) || 1 } }
         }
     },
     created: function () {
-        
+        this.axios({
+            url: '/admin/partmentList'
+        }).then(res => {
+            if(res.status === 200) {
+                this.partmentList = res.data
+            }
+        })
     },
     watch: {
 
     },
     methods: {
+        editNews(id) {
+            this.$router.push({ name: 'partmentAdd', query: { id: id }, params: { act: 'edit' } })
+        },
+        deleNews(id, name) {
 
+        },
         refreshPage() {
             this.reload()
         },
