@@ -3,16 +3,25 @@ const util = require('../util/util.js');
 const serverUtil = require('./serverUtil.js');
 module.exports = {
     partmentList: async ctx => {
-
+        const sql = 'select id, name from partment order by id asc';
+        const result = await mysql.nquery(sql);
+        ctx.body = result
+    },
+    getPartment: async ctx => {
+        let id = ctx.query.id;
+        id = parseInt(id);
+        const sql = 'select id, name from partment where id=' + id;
+        const result = await mysql.nquery(sql);
+        ctx.body = result
     },
     checkPartmentName: async ctx => {
         const name = ctx.request.body.name;
-        const sql = 'select name from partment';
+        const sql = 'select name from partment where name="'+ name + '"';
         const result = await mysql.nquery(sql);
         if(result.length === 0) {
-            ctx.body = { mystatus: 0 }
+            ctx.body = { myStatus: 0 }
         } else {
-            ctx.body = { mystatus: 1 }
+            ctx.body = { myStatus: 1 }
         }
     },
     subPartment: async ctx => {
@@ -27,7 +36,8 @@ module.exports = {
         }
         const result = await mysql.nquery(sql);
         let status;
-        if(result.changedRows > 0) {
+        console.log(result)
+        if(result.changedRows === 1 || result.affectedRows === 1) {
             status = { myStatus: 1 }
         } else {
             status = { myStatus: 0}

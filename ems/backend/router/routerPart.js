@@ -6,6 +6,11 @@ module.exports = [
         middleware: partment.partmentList
     },
     {
+        method: 'get',
+        url: '/admin/getPartment',
+        middleware: partment.getPartment
+    },
+    {
         method: 'post',
         url: '/admin/checkPartmentName',
         middleware: partment.checkPartmentName
