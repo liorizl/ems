@@ -12,6 +12,9 @@ import newsSetting from "../components/news/NewsSetting.vue"
 import template from "../components/template/template.vue";
 import tempAdd from "../components/template/tempAdd.vue";
 import tempList from "../components/template/tempList.vue";
+import partment from "../components/partment/partment.vue";
+import partmentList from "../components/partment/partmentList.vue";
+import partmentAdd from "../components/partment/partmentAdd.vue";
 
 Vue.use(Router)
 
@@ -44,6 +47,14 @@ export default new Router({
             { path: '/admin/template/', redirect: { name: 'tempList' } },
             { path: '/admin/template/tempList/', component: tempList, name: 'tempList' },
             { path: '/admin/template/tempAdd/:act', component: tempAdd, name: 'tempAdd' },
+          ]
+        },
+        {
+          path: '/admin/partment', component: partment,
+          children: [
+            { path: '/admin/partment/', redirect: { name: 'partmentList' } },
+            { path: '/admin/partment/partmentList/', component: partmentList, name: 'partmentList' },
+            { path: '/admin/partment/partmentAdd/:act', component: partmentAdd, name: 'partmentAdd' },
           ]
         },
       ]

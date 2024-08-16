@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="left">
-            <ul>
+            <ul class="singleCol">
                 <router-link to="/admin/news/newsList" tag="li">新闻列表</router-link>
                 <router-link :to="{name: 'newsAdd', params: {act: 'add'}}" tag="li">添加新闻</router-link>
                 <router-link to="/admin/news/newsSetting" tag="li">新闻设置</router-link>
@@ -33,7 +33,7 @@ export default {
         // goNav(e) {
         //     this.activeClassId = e.id
         //     if (this.$parent.$refs.appCon) this.$parent.$refs.appCon.scrollIntoView()
-        //     this.$router.push({ name: 'articleList', query: { cid: e.cid }, params: { title: e.title } })
+        //     this.$router.push({ name: 'newsList', query: { cid: e.cid }, params: { title: e.title } })
         //     .catch(err => {
         //         // console.log('点击了相同的链接！')
         //     })

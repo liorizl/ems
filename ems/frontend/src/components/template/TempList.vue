@@ -12,7 +12,7 @@
                 <span class="operate">操作</span>
             </li>
             <template v-for="temp in tempList">
-                <li>
+                <li :key="temp">
                     <span class="id">{{temp.id}}</span>
                     <span class="title">{{temp.title}}</span>
                     <template v-if="type===1">

@@ -1,14 +1,19 @@
 const news = require('../server/news.js')
 module.exports = [
-    // {
-    //     method: 'get',
-    //     url: '/admin/getArtTemp',
-    //     middleware: article.getArtTemp
-    // },
+    {
+        method: 'get',
+        url: '/admin/getNewsTemp',
+        middleware: news.getNewsTemp
+    },
     {
         method: 'get',
         url: '/admin/getNewsList',
         middleware: news.getNewsList
+    },
+    {
+        method: 'get',
+        url: '/admin/getContentTempList',
+        middleware: news.getContentTempList
     },
     // {
     //     method: 'get',

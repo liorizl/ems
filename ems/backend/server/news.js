@@ -7,12 +7,17 @@ const config = require("../config/config.json");
 // const column = require("./column.js");
 // const buildCol = require('../function/buildCol.js');
 module.exports = {
-    // getArtTemp: async ctx => {
-    //     const cid = parseInt(ctx.query.cid);
-    //     const sql = 'select tempContent, path1, path2 from columns where cid=' + cid;
-    //     let result = await mysql.nquery(sql);
-    //     ctx.body = result[0];
-    // },
+    getNewsTemp: async ctx => {
+        const sql = 'select contentTemp from news_setting';
+        const result = await mysql.nquery(sql);
+        console.log(result[0])
+        ctx.body = result[0];
+    },
+    getContentTempList: async ctx => {
+        const sql = 'select title from template where type=4';
+        const result = await mysql.nquery(sql);
+        ctx.body = result;
+    },
     getNewsList: async ctx => {
         const num = parseInt(ctx.query.num) ? parseInt(ctx.query.num) : 10 ;
         const page = parseInt(ctx.query.page) || null;

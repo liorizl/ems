@@ -55,20 +55,6 @@
                             <input type="button" value="增加来源" @click="addSource">
                         </span>
                     </div>
-
-                    <div class="input">
-                        <span class="input-title"><label for="author">文章作者</label></span>
-                        <span class="input-con">
-                            <input type="text" id="author" :class="errInput[4]" v-model="author" name="author">
-                            <select @change="checkAuthor($event.target.value)">
-                                <option value="0" >选择作者</option>
-                                <template v-for="atuhor in authorList">
-                                    <option :value="atuhor">{{atuhor}}</option>
-                                </template>
-                            </select>
-                            <input type="button" value="增加作者" @click="addAuthor">
-                        </span>
-                    </div>
                     <div class="input">
                         <span class="input-title"><label for="content">文章内容</label></span>
                         <span class="input-con noIndent padding">
@@ -98,6 +84,7 @@
                     <div class="input">
                         <span class="input-title"><label for="tempName">模版</label></span>
                         <span class="input-con">
+                            <input type="text" id="tempNameDefault" name="tempNameDefault" v-model="tempNameDefault">
                             <select name="tempName" id="tempName" v-model="tempName" :class="errInput[2]">
                                 <template v-for="contentTemp in contentTempList">
                                     <option v-bind:value="contentTemp.title" v-bind:class="contentTemp.title===tempNameDefault?'text':''">{{contentTemp.title}}</option>
@@ -189,77 +176,79 @@ export default {
         }
     },
     created: function () {
-        // this.axios({
-        //     method: 'get',
-        //     url: '/admin/getContentTempList'
-        // }).then(res => {
-        //     if (res.status === 200) {
-        //         this.contentTempList = res.data
-        //     }
-        // })
+        this.axios({
+            method: 'get',
+            url: '/admin/getContentTempList'
+        }).then(res => {
+            if (res.status === 200) {
+                
+                this.contentTempList = res.data
+                console.log(this.contentTempList)
+            }
+        })
         if (this.$route.params.act === 'add') {
             this.content = ''
         }
         if (this.$route.query.page) {
             this.propData.query.page = this.$route.query.page
         }
-        // this.axios({
-        //     method: 'get',
-        //     url: '/admin/getArtTemp?cid=' + this.$route.query.cid
-        // }).then(res => {
-        //     if (res.status === 200) {
-        //         this.tempNameDefault = res.data.tempContent
-        //         if (this.act === 'add') {
-        //             this.propData.act = '添加'
-        //             this.tempName = res.data.tempContent
-        //             this.path = res.data.path2 === '' ? '/' + res.data.path1 : '/' + res.data.path1 + '/' + res.data.path2
-        //         }
-        //         else if (this.act === 'edit') {
-        //             this.propData.act = '编辑'
-        //             if (this.id) {
-        //                 this.axios({
-        //                     method: 'get',
-        //                     url: '/admin/getEditArt?id=' + parseInt(this.id)
-        //                 }).then(res => {
-        //                     if (res.status === 200) {
-        //                         let result = res.data
-        //                         this.title = result.title
-        //                         this.posiArtReady = true
-        //                         this.mainTitle = result.mainTitle
-        //                         this.viceTitle = result.viceTitle
-        //                         this.isIndex = result.isIndex === 'true' ? true : false
-        //                         this.isUse = result.isUse === 'true' ? true : false
-        //                         this.headLine = result.headLine
-        //                         this.suggest = result.suggest
-        //                         this.outUrl = result.outUrl
-        //                         this.keyword = result.keyword
-        //                         this.picUrl = result.picUrl
-        //                         this.picUrl2 = result.picUrl2
-        //                         this.intro = result.intro
-        //                         this.source = result.source
-        //                         this.sourceUrl = result.sourceUrl
-        //                         this.useSourceUrl = result.useSourceUrl === 'true' ? true : false
-        //                         this.author = result.author
-        //                         this.content = result.content
-        //                         this.cComReady = true
-        //                         this.description = result.description
-        //                         this.hits = result.hits
-        //                         this.stars = result.stars
-        //                         this.orderBy = result.orderBy
-        //                         this.path = result.path
-        //                         this.articleName = result.articleName
-        //                         this.tempName = result.tempName
-        //                         this.upTime = result.upTime
-        //                         this.lastEditTime = result.lastEditTime
-        //                     }
-        //                 })
-        //             }
-        //             else {
-        //                 console.log('文章ID不正确！')
-        //             }
-        //         }
-        //     }
-        // })
+        this.axios({
+            method: 'get',
+            url: '/admin/getNewsTemp'
+        }).then(res => {
+            if (res.status === 200) {
+                this.tempNameDefault = res.data.contentTemp
+                if (this.act === 'add') {
+                    this.propData.act = '添加'
+                    this.tempName = res.data.contentTemp
+                    this.path = res.data.path2 === '' ? '/' + res.data.path1 : '/' + res.data.path1 + '/' + res.data.path2
+                }
+                else if (this.act === 'edit') {
+                    this.propData.act = '编辑'
+                    if (this.id) {
+                        this.axios({
+                            method: 'get',
+                            url: '/admin/getEditArt?id=' + parseInt(this.id)
+                        }).then(res => {
+                            if (res.status === 200) {
+                                let result = res.data
+                                this.title = result.title
+                                this.posiArtReady = true
+                                this.mainTitle = result.mainTitle
+                                this.viceTitle = result.viceTitle
+                                this.isIndex = result.isIndex === 'true' ? true : false
+                                this.isUse = result.isUse === 'true' ? true : false
+                                this.headLine = result.headLine
+                                this.suggest = result.suggest
+                                this.outUrl = result.outUrl
+                                this.keyword = result.keyword
+                                this.picUrl = result.picUrl
+                                this.picUrl2 = result.picUrl2
+                                this.intro = result.intro
+                                this.source = result.source
+                                this.sourceUrl = result.sourceUrl
+                                this.useSourceUrl = result.useSourceUrl === 'true' ? true : false
+                                this.author = result.author
+                                this.content = result.content
+                                this.cComReady = true
+                                this.description = result.description
+                                this.hits = result.hits
+                                this.stars = result.stars
+                                this.orderBy = result.orderBy
+                                this.path = result.path
+                                this.articleName = result.articleName
+                                this.tempName = result.tempName
+                                this.upTime = result.upTime
+                                this.lastEditTime = result.lastEditTime
+                            }
+                        })
+                    }
+                    else {
+                        console.log('文章ID不正确！')
+                    }
+                }
+            }
+        })
         // this.axios({
         //     method: 'get',
         //     url: '/admin/getNowArticle?cid=' + this.$route.query.cid
@@ -303,7 +292,6 @@ export default {
             } else {
                 let url, formData = new FormData(formArticle)
                 this.propData.showSub = true
-                console.log(formData.get('upTime'))
                 if (formData.get('isUse') !== 'on') {
                     formData.append('isUse', 'off')
                 }
@@ -517,7 +505,5 @@ export default {
 .error {
     color: #f00;
 }
-.errInput {
-    border: 1px solid #f00;
-}
+
 </style>

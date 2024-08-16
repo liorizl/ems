@@ -12,7 +12,7 @@
             </li>
             <template v-if="newsList&&newsList.length!=0&&Array.isArray(newsList)">
                 <template >
-                    <li v-for="(news, index) in newsList">
+                    <li  v-for="(news, index) in newsList" :key="index">
                         <span class="checkbox"><input type="checkbox" :value="news.id" v-model="checkNews"></span>
                         <span class="id">{{news.id}}</span>
                         <span class="title isLink" :class="news.isUse==='false'?'notUse':''" @click="showNews(news.id, index)">
