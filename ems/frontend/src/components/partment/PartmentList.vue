@@ -23,7 +23,7 @@
                     </li>
                 </template>
             </template>
-            <li v-else-if="partmentList&&partmentList.length!=0&&!Array.isArray(partmentList)">{{partmentList}}</li>
+            <!-- <li v-else-if="partmentList&&partmentList.length!=0&&!Array.isArray(partmentList)">{{partmentList}}</li> -->
             <li v-else class="noCon">还没有部门！</li>
         </ul>
     </div>
@@ -65,7 +65,21 @@ export default {
             this.$router.push({ name: 'partmentAdd', query: { id: id }, params: { act: 'edit' } })
         },
         deleNews(id, name) {
-
+            if (confirm("确定要删除部门“"+ name + "“")) {
+                this.axios({
+                    url: '/admin/delePartment?id=' + id
+                }).then(res => {
+                    if(res.status === 200) {
+                        if(res.data.myStatus === 1) {
+                            alert('删除成功！！')
+                            this.refreshPage()
+                        } else {
+                            alert('删除失败!!')
+                            this.refreshPage()
+                        }
+                    }
+                })
+            } 
         },
         refreshPage() {
             this.reload()

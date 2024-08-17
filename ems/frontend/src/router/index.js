@@ -9,12 +9,15 @@ import newsInfo from "../components/news/NewsInfo.vue";
 import newsList from "../components/news/NewsList.vue";
 import newsAdd from "../components/news/NewsAdd.vue";
 import newsSetting from "../components/news/NewsSetting.vue"
-import template from "../components/template/template.vue";
-import tempAdd from "../components/template/tempAdd.vue";
-import tempList from "../components/template/tempList.vue";
-import partment from "../components/partment/partment.vue";
-import partmentList from "../components/partment/partmentList.vue";
-import partmentAdd from "../components/partment/partmentAdd.vue";
+import template from "../components/template/Template.vue";
+import tempAdd from "../components/template/TempAdd.vue";
+import tempList from "../components/template/TempList.vue";
+import partment from "../components/partment/Partment.vue";
+import partmentList from "../components/partment/PartmentList.vue";
+import partmentAdd from "../components/partment/PartmentAdd.vue";
+import employee from "../components/employee/Employee.vue";
+import employeeList from "../components/employee/EmployeeList.vue";
+import employeeAdd from "../components/employee/EmployeeAdd.vue";
 
 Vue.use(Router)
 
@@ -55,6 +58,14 @@ export default new Router({
             { path: '/admin/partment/', redirect: { name: 'partmentList' } },
             { path: '/admin/partment/partmentList/', component: partmentList, name: 'partmentList' },
             { path: '/admin/partment/partmentAdd/:act', component: partmentAdd, name: 'partmentAdd' },
+          ]
+        },
+        {
+          path: '/admin/employee', component: employee,
+          children: [
+            { path: '/admin/employee/', redirect: { name: 'employeeList' } },
+            { path: '/admin/employee/employeeList/', component: employeeList, name: 'employeeList' },
+            { path: '/admin/employee/employeeAdd/:act', component: employeeAdd, name: 'employeeAdd' },
           ]
         },
       ]

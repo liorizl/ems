@@ -24,6 +24,19 @@ module.exports = {
             ctx.body = { myStatus: 1 }
         }
     },
+    delePartment: async ctx => {
+        let id = ctx.query.id;
+        id = parseInt(id);
+        const sql = 'delete from partment where id=' + id;
+        const result = await mysql.nquery(sql);
+        let myStatus;
+        if (result.affectedRows === 1) {
+            myStatus = 1;
+        } else {
+            myStatus = 0;
+        }
+        ctx.body = { myStatus }
+    },
     subPartment: async ctx => {
         const id = ctx.query.id ? parseInt(ctx.query.id) : null;
         const name = ctx.request.body.name;

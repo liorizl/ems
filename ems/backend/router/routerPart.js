@@ -20,4 +20,9 @@ module.exports = [
         url: '/admin/subPartment',
         middleware: partment.subPartment
     },
+    {
+        method: 'get',
+        url: '/admin/delePartment',
+        middleware: partment.delePartment
+    },
 ]

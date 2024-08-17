@@ -61,9 +61,10 @@ const routerLogin = require('./router/routerLogin.js');
 // const routerTag = require('./router/routerTag.js');
 const routerTemp = require('./router/routerTemp.js');
 const routerPartment = require('./router/routerPart.js');
+const employee = require('./router/routerEmployee.js');
 let  adminUrls = [];
 // const routerAll = noNeedLogin.concat(routerBasic).concat(routerCol).concat(routerArt).concat(routerLogin).concat(routerOther).concat(routerTag).concat(routerTemp);
-const routerAll = noNeedLogin.concat(routerBasic).concat(routerLogin).concat(routerNews).concat(routerTemp).concat(routerPartment);
+const routerAll = noNeedLogin.concat(routerBasic).concat(routerLogin).concat(routerNews).concat(routerTemp).concat(routerPartment).concat(employee);
 routerAll.forEach((route) => {
     if (/admin/.test(route.url)) {
         adminUrls.push(route.url)
