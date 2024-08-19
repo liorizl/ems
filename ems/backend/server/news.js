@@ -10,7 +10,6 @@ module.exports = {
     getNewsTemp: async ctx => {
         const sql = 'select contentTemp from news_setting';
         const result = await mysql.nquery(sql);
-        console.log(result[0])
         ctx.body = result[0];
     },
     getContentTempList: async ctx => {

@@ -6,8 +6,9 @@
                 <ul class="nav-ul flexCol ">
                     <li class="iconfont"><router-link to="/admin/system/" keep-alive>系统</router-link></li>
                     <li class="iconfont"><router-link to="/admin/news/" keep-alive>新闻</router-link></li>
-                    <li class="iconfont"><router-link to="/admin/partment/" keep-alive>部门</router-link></li>
+                    <li class="iconfont"><router-link to="/admin/department/" keep-alive>部门</router-link></li>
                     <li class="iconfont"><router-link to="/admin/employee/" keep-alive>员工</router-link></li>
+                    <li class="iconfont"><router-link to="/admin/attendance/" keep-alive>考勤</router-link></li>
                     <li class="iconfont"><router-link to="/admin/template/" keep-alive>模版</router-link></li>
                     <li class="iconfont"><router-link to="/admin/tag/" keep-alive>标签 </router-link></li>
                     <li class="iconfont"><router-link to="/admin/user/" keep-alive>用户 </router-link></li>

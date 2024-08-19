@@ -2,7 +2,7 @@
     <div class="rightCon">
         <now-position v-bind:posList="posiList"></now-position>
         <div class="ccon">
-            <form method="post" name="formPartment">
+            <form method="post" name="formDepartment">
                 
                 <div class="input">
                     <span class="input-title"><label for="name">部门名称</label></span>
@@ -39,7 +39,7 @@ export default {
     created: function(){
         if(this.$route.query.id) {
             this.axios({
-                url: "/admin/getPartment?id="+ this.$route.query.id
+                url: "/admin/getDepartment?id="+ this.$route.query.id
             }).then(res => {
                 if(res.status === 200) {
                     console.log(res.data.length)
@@ -59,7 +59,7 @@ export default {
             this.isChecking = true
             this.axios({
                 method: 'post',
-                url: '/admin/checkPartmentName',
+                url: '/admin/checkDepartmentName',
                 data: {
                     name: this.name
                 }
@@ -92,9 +92,9 @@ export default {
             this.checkName()
             let url
             if(this.act === 'edit') {
-                url = '/admin/subPartment?id=' + this.id
+                url = '/admin/subDepartment?id=' + this.id
             } else {
-                url = '/admin/subPartment'
+                url = '/admin/subDepartment'
             }
             this.axios({
                 method: 'post',
@@ -107,7 +107,7 @@ export default {
                     console.log(res.data)
                     if(res.data.myStatus === 1) {
                         alert('添加/修改成功！')
-                        this.$router.push({ name: 'partmentList' })
+                        this.$router.push({ name: 'departmentList' })
                     } else {
                         alert('添加/修改失败！')
                     }

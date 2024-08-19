@@ -12,36 +12,41 @@ import newsSetting from "../components/news/NewsSetting.vue"
 import template from "../components/template/Template.vue";
 import tempAdd from "../components/template/TempAdd.vue";
 import tempList from "../components/template/TempList.vue";
-import partment from "../components/partment/Partment.vue";
-import partmentList from "../components/partment/PartmentList.vue";
-import partmentAdd from "../components/partment/PartmentAdd.vue";
+import department from "../components/department/Department.vue";
+import departmentList from "../components/department/DepartmentList.vue";
+import departmentAdd from "../components/department/DepartmentAdd.vue";
 import employee from "../components/employee/Employee.vue";
 import employeeList from "../components/employee/EmployeeList.vue";
 import employeeAdd from "../components/employee/EmployeeAdd.vue";
+import attendance from "../components/attendance/Attendance.vue";
+import attendEmpList from "../components/attendance/AttendEmpList.vue";
+import attendList from "../components/attendance/AttendList.vue";
+import attendAdd from "../components/attendance/AttendAdd.vue";
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     { path: "", redirect: { name: 'login' } },
-    { path: '/login', name: 'login', component: login},
-    { path: '/admin', name: 'admin', component: admin,
+    { path: '/login', name: 'login', component: login },
+    {
+      path: '/admin', name: 'admin', component: admin,
       children: [
         { path: '/admin/', redirect: { name: 'sysCon' } },
         {
-            path: '/admin/system/', component: system, name: 'system',
-            children: [
-                { path: '/admin/system/', component: sysCon, redirect: { name: 'sysCon' } },
-                { path: '/admin/system/SysCon', component: sysCon, name: 'sysCon' },
-            ]
+          path: '/admin/system/', component: system, name: 'system',
+          children: [
+            { path: '/admin/system/', component: sysCon, redirect: { name: 'sysCon' } },
+            { path: '/admin/system/SysCon', component: sysCon, name: 'sysCon' },
+          ]
         },
         {
           path: '/admin/news', component: news,
           children: [
-              { path: '/admin/news/', component: newsInfo },
-              { path: '/admin/news/NewsList/', component: newsList, name: 'newsList' },
-              { path: '/admin/news/NewsAdd/:act', component: newsAdd, name: 'newsAdd' },
-              { path: '/admin/news/newsSetting/', component: newsSetting, name: 'newsSetting' }
+            { path: '/admin/news/', component: newsInfo },
+            { path: '/admin/news/NewsList/', component: newsList, name: 'newsList' },
+            { path: '/admin/news/NewsAdd/:act', component: newsAdd, name: 'newsAdd' },
+            { path: '/admin/news/newsSetting/', component: newsSetting, name: 'newsSetting' }
           ]
         },
         {
@@ -53,11 +58,11 @@ export default new Router({
           ]
         },
         {
-          path: '/admin/partment', component: partment,
+          path: '/admin/department', component: department,
           children: [
-            { path: '/admin/partment/', redirect: { name: 'partmentList' } },
-            { path: '/admin/partment/partmentList/', component: partmentList, name: 'partmentList' },
-            { path: '/admin/partment/partmentAdd/:act', component: partmentAdd, name: 'partmentAdd' },
+            { path: '/admin/department/', redirect: { name: 'departmentList' } },
+            { path: '/admin/department/departmentList/', component: departmentList, name: 'departmentList' },
+            { path: '/admin/department/departmentAdd/:act', component: departmentAdd, name: 'departmentAdd' },
           ]
         },
         {
@@ -66,6 +71,15 @@ export default new Router({
             { path: '/admin/employee/', redirect: { name: 'employeeList' } },
             { path: '/admin/employee/employeeList/', component: employeeList, name: 'employeeList' },
             { path: '/admin/employee/employeeAdd/:act', component: employeeAdd, name: 'employeeAdd' },
+          ]
+        },
+        {
+          path: '/admin/attendance', component: attendance,
+          children: [
+            { path: '/admin/attendance/', redirect: { name: 'attendEmpList' } },
+            { path: '/admin/attendance/attendEmpList/', component: attendEmpList, name: 'attendEmpList' },
+            { path: '/admin/attendance/attendList/', component: attendList, name: 'attendList' },
+            { path: '/admin/attendance/attendAdd/:act', component: attendAdd, name: 'attendAdd' },
           ]
         },
       ]
