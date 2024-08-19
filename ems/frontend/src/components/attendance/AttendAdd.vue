@@ -45,6 +45,8 @@
                     <span class="input-title"><label for="sourceUrl">考勤文件</label></span>
                     <span class="input-con">
                         <input type="text" id="sourceUrl"  name="sourceUrl" v-model="sourceUrl" size="30">
+                            <input type="button" value="上传" >
+                            <input type="file" name="upfile" >
                         &nbsp;&nbsp; 查看文件
                     </span>
                 </div>
@@ -86,6 +88,7 @@ export default {
         };
     },
     created() {
+        
         if(this.id) {
             this.axios({
                 url: '/admin/getAttend?id=' + this.id
@@ -108,6 +111,7 @@ export default {
         subForm() {
             let url, formData = new FormData(formAttend)
             formData.append('id', this.id)
+            formData.append('empId', this.empId)
             formData.append('name', this.name)
             formData.append('department', this.department)
             if(this.act === 'edit'){
